@@ -14,23 +14,19 @@ def encrypt(text_letter, shift_amount):
     for letter in text_letter:
         position = alphabet.index(letter)
         new_position = position + shift_amount
-        new_message = alphabet[new_position]
-        cipher_text += alphabet[new_message]
+        cipher_text += alphabet[new_position]
     print(f"The encode text is {cipher_text}")
-
-
-encrypt(text_letter=text, shift_amount=shift)
 
 def decrypt(cipher_text, shift_amount):
     plain_text = ""
     for letter in cipher_text:
         position = alphabet.index(letter)
         new_position = position - shift_amount
-        new_message = alphabet[new_position]
-        plain_text += alphabet[new_message]
-    print(f"The decode text is {cipher_text}")
+        plain_text += alphabet[new_position]
+    print(f"The decode text is {plain_text}")
 
 if direction == "encode":
     encrypt(text_letter=text, shift_amount=shift)
 elif direction == "decode":
     decrypt(cipher_text=text, shift_amount=shift)
+    
