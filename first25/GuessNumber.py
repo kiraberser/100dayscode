@@ -1,34 +1,39 @@
-import random
+from random import randint
 
 print("Welcome to the Number Guessing Game!")
-print("I'm thinking of a number between 1 and 100")
-random_number = random.randint(1, 100)
-print(f"The right number is {random_number}")
-defficulty_level = input("Choose a difficulty level ('easy' or 'hard'):")
+# Include an ASCII art logo.
+# Allow the player to submit a guess for a number between 1 and 100.
+print("I'm thinkig of a number between 1 and 100.")
+ANSWER = randint(1, 100)
+print(f"Pssst, the correct answer is {ANSWER}")
+choose_number = input("Choose a difficulty. Type 'easy' or 'hard': ")
 
-def guess_number(difficulty):
-    if difficulty == "easy":
-        lives = 10
-    elif difficulty == "hard":
-        lives = 5
-    else:
-        print("You must select any difficulty")
-        return
 
-    while lives > 0:
-        print(f"You have {lives} attemps remaining to guess the number.")
-        guess = int(input("Make a guess: "))
+def choose(live):
+    if choose_number == "hard":
+        live = 5
+    elif choose_number == "easy":
+        live = 10
+    else: 
+        live = 0
+    return live
+live = choose(0)
 
-        if guess > random_number:
-            print("Too high.\nGuess again.")
-        elif guess < random_number:
-            print("Too low.\nGuess again.")
+while live > 0: 
+    guess = int(input("Make a guess: "))
+    if guess > ANSWER:
+        print("Too high.")
+        live -= 1
+        if live > 0:
+            print(f"You have {live} attempts remaining to guess the number.")
+    elif guess < ANSWER:
+        print("Too low")
+        live -= 1
+        if live > 0:
+            print(f"You have {live} attempts remaining to guess the number.")
+    else: 
+        print(f"You got it! The answer was {ANSWER}.")
+        break
 
-        else:
-            print(f"Congratulations! You guessed the number {random_number}")
-            break
-        lives -= 1
-    
-    if lives == 0:
-        print(f"Sorry, you've run out of attemps. The correct number was {random_number}.")
-guess_number(defficulty_level)
+if live == 0:
+    print(F"You lose. The answer was {ANSWER}.")

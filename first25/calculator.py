@@ -27,7 +27,7 @@ def calculator():
   game = True
   while game:
     operation_symbol = input("Pick an operation: ")
-    num2 = float   (input("What's the next number?: "))
+    num2 = float(input("What's the next number?: "))
     calculation_function = operations[operation_symbol]
     answer = calculation_function(num1, num2)
     

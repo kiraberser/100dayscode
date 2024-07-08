@@ -1,0 +1,6 @@
+0.- Import data, logo, vs, random 
+1.- Create a random famous 
+2.- The structure of the compare game
+3.- function if you're right 
+4.- game and declare variables 
+5.- the logic whith while and conditions 
