@@ -10,15 +10,14 @@ screen.addshape(image)
 turtle.shape(image)
 
 #Crear el objeto estado
-state = State()
+location_state = State()
 
 #List de los estados que son correctos
 guessed_state = []
-wrong_list = []
 
 #Llamar a la libreria pandas para leer csv y leer los estados de estados unidos
 data = pandas.read_csv("50_states.csv")
-states = data["state"]
+states = data["state"].to_list()
 
 while len(guessed_state) < 50:
     #Pregunta
@@ -26,18 +25,13 @@ while len(guessed_state) < 50:
                                     prompt="What's another state's name?").title()
     #Si la respuesta es la misma
     if answer_state == "Exit":
+        missing_states = [state for state in states if state not in guessed_state]
+        df = pandas.DataFrame(missing_states)
+        df.to_csv("Missing_States.csv")
         break
-    correct_answer = data[states == answer_state] 
-    if not correct_answer.empty:
-        #Sacar las cordenadas del estado
-        x_value = correct_answer['x'].values[0]
-        y_value = correct_answer['y'].values[0]
-        #Ocupar el objeto state y llamar al metodo correct_state en donde le pasamos valores
-        state.correct_state(answer_state.capitalize(), x_value, y_value)
+    if answer_state in states and answer_state not in guessed_state:
         guessed_state.append(answer_state)
-    else:
-        wrong_list.append(answer_state)
-        df = pandas.DataFrame(wrong_list)
-        df.to_csv("Wrong_States.csv")
-
-    
+        state_data = data[data.state == answer_state]
+        x = int(state_data.x)
+        y = int(state_data.y)
+        location_state.correct_state(answer_state, x, y)    
