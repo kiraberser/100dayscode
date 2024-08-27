@@ -33,10 +33,10 @@ def start_timer():
         count_down(long_break_sec)
         timer_label.config(text="Break", fg=RED)
     elif reps % 2 == 0:
-        count_down(10)
+        count_down(short_break_sec)
         timer_label.config(text="Break", fg=PINK)
     else:
-        count_down(10)
+        count_down(work_sec)
         timer_label.config(text="Work", fg=GREEN)
         
 

@@ -3,13 +3,13 @@ import datetime as dt
 import random
 
 MY_EMAIL = "edwinvega3106@gmail.com"
-PASSWORD = "ivgxhywapbfggdcg"
+PASSWORD = "gjyeegdtxewfwjom"
 today = dt.datetime.now()
 
 with open("quotes.txt") as quote:
     data = quote.readlines()
     random_quote = random.choice(data)    
-    if today.weekday() == 1:
+    if today.weekday() == 0:
         with smtplib.SMTP("smtp.gmail.com", 587) as connect:
             connect.starttls()#Transport Layer Security
             connect.login(user=MY_EMAIL, password=PASSWORD)
