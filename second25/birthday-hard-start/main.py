@@ -2,6 +2,7 @@ import pandas
 from datetime import datetime
 import random
 import smtplib
+import html
 
 
 MY_EMAIL = "edwinvega3106@gmail.com"
@@ -27,6 +28,6 @@ if today_tuple in birthdays_dict:
         connect.sendmail(
             from_addr=MY_EMAIL,
             to_addrs=birthday_person["email"],
-            msg=f"Subject: Happy Birthday!\n\n{contents}".encode('utf-8')
+            msg=f"Subject: Happy Birthday!\n\n{html.unescape(contents)}".encode('utf-8')
         )
 
