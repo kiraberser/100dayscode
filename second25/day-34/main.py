@@ -12,7 +12,7 @@ parameters = {
     "lat": LAT,
     "lon": LNG,
     "appid": os.environ.get("OPW_API_KEY"),
-    "cnt": 4
+    "cnt": 4 #this is equal to 12 hours if you want the weather only for the next 6 houres you can put the number 2
 }
 
 response = requests.get(url=f"https://api.openweathermap.org/data/2.5/forecast?", params=parameters)
@@ -26,6 +26,7 @@ for hour_data in data["list"]:
     condition_code = hour_data["weather"][0]['id']
     if int(condition_code) < 700:
         will_rain = True
+    
 
 if will_rain:
     client = Client(account_sid, auth_token)
@@ -34,4 +35,10 @@ if will_rain:
         from_="+18178359131",
         to=""
     )
-
+else:
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+        body="Hoy estará soleado, te recomiendo ponerte bloqueador solar",
+        from_="18178359131",
+        to=""
+    )
