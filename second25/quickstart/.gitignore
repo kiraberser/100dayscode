@@ -1,0 +1,16 @@
+# Ignorar archivos y carpetas específicos
+
+# Carpeta que contiene los entornos virtuales
+__pycache__/
+Sheets/
+
+# Archivos de configuración de entorno y credenciales
+.env
+credentials.json
+
+# Directorios de entorno virtual
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+
