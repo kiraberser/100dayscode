@@ -4,7 +4,6 @@ import random
 import smtplib
 import html
 
-
 MY_EMAIL = "edwinvega3106@gmail.com"
 PASSWORD = "aifykzefhppxvglw"
 

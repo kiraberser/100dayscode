@@ -5,9 +5,11 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
+
 load_dotenv()
 CLIENT_ID = os.environ['CLIENT_ID']
 API_SECRET = os.environ['CLIENT_SECRET']
+
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
@@ -45,7 +47,7 @@ for music in list_music:
     except IndexError:
         print(f"{index}.-{music} doesn't exist in Sporify")
         index += 1
-
+print("Music added")
 #Playlist
 
 playlist = sp.user_playlist_create(user=user_id, name=f"{question} Billboard 100", public=False)
