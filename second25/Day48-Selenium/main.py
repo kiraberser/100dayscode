@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time 
+from datetime import datetime
 
 #Keep Chrome browser open after program finishes
 
@@ -10,25 +11,21 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 
 driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.python.org")
-    
 
-events = {
-    index - 1: {
-        'time': "2024-" + driver.find_element(By.XPATH, value=f'//*[@id="content"]/div/section/div[2]/div[2]/div/ul/li[{index}]/time').text,
-        'name': driver.find_element(By.XPATH, value=f'//*[@id="content"]/div/section/div[2]/div[2]/div/ul/li[{index}]/a').text
+event_time = driver.find_elements(By.CSS_SELECTOR, value=".event-widget time")
+event = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li a")
+events = {}
+
+year = datetime.now().year
+
+for n in range(len(event_time)):
+    events[n] = {
+        "time": f"{year}-{event_time[n].text}",
+        "name": {event[n].text}
     }
-    for index in range(1, 6)
-}
+
 print(events)
-
-
 time.sleep(2)
-
-
-
-
-
-
 
 #price_dollar = driver.find_element(By.CLASS_NAME, value="a-price-whole")
 #price_cents = driver.find_element(By.CLASS_NAME, value="a-price-fraction")
