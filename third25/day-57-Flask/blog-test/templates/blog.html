@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+</head>
+<body>
+    {% if founded == False %}
+        <h1>No encontramos ningún post con el id {{ id }}</h1>
+    {% endif %}
+    {% for blog_post in posts %}
+        {% if blog_post['id'] == id %}
+            <h1>{{ blog_post['title'] }}</h1>
+            <h2>{{ blog_post['subtitle'] }}</h2>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
+
