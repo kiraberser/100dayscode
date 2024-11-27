@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/output.css') }}" />
+    <title>Sobre Nosotros</title>
+</head>
+
+{% include "navbar.html" %}
+<body class="bg-gray-50">
+    <main>
+        <section class="bg-white py-12 sm:py-16 lg:py-24 mb-10 min-h-screen">
+            <div class="max-w-screen mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Conoce a Nuestro Equipo</h2>
+                    <p class="text-lg text-gray-600">Nos apasiona crear soluciones innovadoras y sostenibles para nuestro entorno y comunidad.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <!-- Miembro del equipo 1 -->
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <img src="https://via.placeholder.com/400" alt="Miembro del equipo" class="w-full h-56 object-cover object-center">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Juan Pérez</h3>
+                            <p class="text-gray-600 mt-2">Co-fundador y Director General</p>
+                            <p class="text-gray-500 mt-4">Con experiencia en sostenibilidad y marketing, Juan lidera el desarrollo de estrategias para promover productos que benefician tanto al medio ambiente como a la comunidad.</p>
+                        </div>
+                    </div>
+                    <!-- Miembro del equipo 2 -->
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <img src="https://via.placeholder.com/400" alt="Miembro del equipo" class="w-full h-56 object-cover object-center">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800">María González</h3>
+                            <p class="text-gray-600 mt-2">Gerente de Sostenibilidad</p>
+                            <p class="text-gray-500 mt-4">María es responsable de implementar prácticas ecológicas en cada etapa de la producción y asegurar que nuestros productos sean 100% sostenibles.</p>
+                        </div>
+                    </div>
+                    <!-- Miembro del equipo 3 -->
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <img src="https://via.placeholder.com/400" alt="Miembro del equipo" class="w-full h-56 object-cover object-center">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Carlos Sánchez</h3>
+                            <p class="text-gray-600 mt-2">Director de Innovación</p>
+                            <p class="text-gray-500 mt-4">Carlos está a cargo de la investigación y el desarrollo de nuevas tecnologías que nos permiten crear productos más eficientes y ecológicos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% include "footer.html" %}
+</body>
+</html>
