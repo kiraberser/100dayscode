@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{{ bootstrap.load_css() }}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}Login{% endblock  %}
+
+{% block content %}
+	<div class="container" style="width: 500px; margin: 20px;">
+	<h1>Login</h1>
+		{{render_form(form)}}
+		<a href="{{url_for('home')}}" style="padding-top: 50px;">Volver</a>
+	</div>
+{% endblock  %}
