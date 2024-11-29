@@ -1,36 +1,74 @@
-  <header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between py-4 px-6 md:py-6 md:px-10 bg-white shadow-md max-w-screen mx-auto ">
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between py-4 px-6 bg-white shadow-md max-w-screen mx-auto md:py-6 md:px-10">
   <!-- Logo -->
   <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
     Blog
   </a>
 
+  <!-- Greeting for logged-in user -->
   {% if user %}
-    <h1 class="md:inline-flex text-lg font-semibold text-gray-700">{{ user }}!</h1>
+    <h1 class="hidden sm:inline-flex text-lg font-semibold text-gray-700">{{ user }}!</h1>
   {% endif %}
 
+  <!-- Desktop Navigation -->
   <nav class="hidden lg:flex gap-8">
     <a href="/" class="text-lg font-medium text-gray-600 transition hover:text-indigo-500">Home</a>
     <a href="{{ url_for('contact') }}" class="text-lg font-medium text-gray-600 transition hover:text-indigo-500">Contact</a>
     <a href="{{ url_for('about') }}" class="text-lg font-medium text-gray-600 transition hover:text-indigo-500">About</a>
   </nav>
 
-  <a href="{{ url_for('receive_data') }}" class="hidden lg:inline-block rounded-md bg-indigo-500 px-6 py-2 text-sm font-medium text-white hover:bg-indigo-600">
-    Log in
-  </a>
+  <!-- Desktop Log In Button -->
+  <div class="relative inline-block text-left">
+    {% if user_is_logged_in %}
+      <!-- Botón del dropdown -->
+      <button id="dropdown-button" class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-800 text-white text-lg font-semibold">
+        {{ username[0].capitalize() }}
+      </button>
+      
+      <!-- Menú del dropdown -->
+      <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <div class="py-1">
+          <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Log Out</a>
+        </div>
+      </div>
+      
+      <script>
+        // Script para alternar el dropdown
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        dropdownButton.addEventListener('click', () => {
+          dropdownMenu.classList.toggle('hidden');
+        });
+      </script>
+    {% else %}
+      <!-- Botón de Login si no está logueado -->
+      <a href="{{ url_for('receive_data') }}" class="text-blue-500 hover:underline">Login</a>
+    {% endif %}
+  </div>
 
   <!-- Mobile Menu Button -->
-  <button id="mobile-menu-button" type="button" aria-expanded="false" class="lg:hidden inline-flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-300">
+  <button
+    id="mobile-menu-button"
+    type="button"
+    aria-expanded="false"
+    class="lg:hidden inline-flex items-center justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-300"
+  >
     <span class="material-icons">menu</span>
   </button>
 </header>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white shadow-md z-40 transform translate-y-[-100%] opacity-0 transition-all duration-300">
+<div
+  id="mobile-menu"
+  class="hidden lg:hidden fixed left-0 w-full bg-white shadow-md z-40 overflow-hidden transform opacity-0 -translate-y-full transition-all duration-300 "
+>
   <nav class="flex flex-col gap-4 p-4">
     <a href="/" class="text-lg font-medium text-gray-600 transition hover:text-indigo-500">Home</a>
     <a href="{{ url_for('contact') }}" class="text-lg font-medium text-gray-600 transition hover:text-indigo-500">Contact</a>
     <a href="{{ url_for('about') }}" class="text-lg font-medium text-gray-600 transition hover:text-indigo-500">About</a>
-    <a href="{{ url_for('receive_data') }}" class="block rounded-md bg-indigo-500 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-600">
+    <a
+      href="{{ url_for('receive_data') }}"
+      class="block rounded-md bg-indigo-500 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-600"
+    >
       Log in
     </a>
   </nav>
@@ -41,15 +79,20 @@
   const mobileMenu = document.getElementById("mobile-menu");
 
   mobileMenuButton.addEventListener("click", () => {
+    const isHidden = mobileMenu.classList.contains("hidden");
+
+    // Toggle visibility
     mobileMenu.classList.toggle("hidden");
+    mobileMenu.classList.toggle("-translate-y-full");
     mobileMenu.classList.toggle("translate-y-0");
     mobileMenu.classList.toggle("opacity-100");
     mobileMenu.classList.toggle("opacity-0");
 
+    // Update button icon
     const icon = mobileMenuButton.querySelector(".material-icons");
-    icon.textContent = icon.textContent === "menu" ? "close" : "menu";
+    icon.textContent = isHidden ? "close" : "menu";
 
-    const isExpanded = mobileMenuButton.getAttribute("aria-expanded") === "true";
-    mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+    // Update ARIA attribute
+    mobileMenuButton.setAttribute("aria-expanded", String(!isHidden));
   });
 </script>
