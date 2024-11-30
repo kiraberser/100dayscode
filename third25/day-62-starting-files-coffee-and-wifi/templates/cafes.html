@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Restaurants
+{% endblock %}
+
+{% block content %}
+  <div class="bg-white mx-auto p-4">
+    <div class="bg-white p-8 rounded-lg shadow-2xl border border-slate-200 mt-20">
+      <h1 class="text-3xl font-semibold text-center text-black mb-6">All Cafes</h1>
+      
+      <!-- Tabla -->
+      <div class="overflow-x-auto"> <!-- Permite scroll horizontal en pantallas pequeñas -->
+        <table class="min-w-full rounded-2xl border border-slate-300 ">
+          <thead class="bg-gray-100 border-b border-slate-300">
+            <tr>
+              {% for cafe_headers in cafes[0] %}
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-800 border-slate-300">
+                  {{ cafe_headers }}
+                </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for cafe in cafes[1:] %}
+              <tr class="hover:bg-gray-50">
+                {% for value in cafe %}
+                  <td class="px-6 py-4 text-sm text-gray-700  border-slate-300 ">
+                    {% if 'http' in value %}
+                    <a href="{{value}}" class="text-yellow-900 border-b-2 border-transparent hover:border-yellow-900 transition-all duration-300" target="_blank">Maps Link</a>
+                    {% else %}
+                    {{ value }}
+                    {% endif %}
+                  </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Enlace de regreso -->
+      <div class="text-left mt-6 ">
+        <a href="{{ url_for('home') }}" class="text-black hover:underline text-sm p-4">Regresar a la pagina principal</a>
+        <a href="{{ url_for('add_cafe') }}" class="text-black hover:underline text-sm p-4">Agregar cafeteria</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

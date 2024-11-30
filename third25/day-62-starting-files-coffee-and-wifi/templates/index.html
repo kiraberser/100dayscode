@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Coffee and Wifi{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+  <!-- Main Section -->
+  <div class="bg-white shadow-2xl rounded-lg p-8 max-w-lg text-center">
+    <!-- Header -->
+    <h1 class="text-4xl font-semibold text-gray-800">☕️ Coffee & Wifi 💻</h1>
+    <p class="text-gray-600 mt-2 text-lg">Want to work in a cafe but need power and wifi?</p>
+    <hr class="my-4 border-gray-300">
+    <!-- Description -->
+    <p class="text-gray-600 text-base">
+      You've found the right place! Checkout my collection of cafes with data on power socket availability, wifi speed, and coffee quality.
+    </p>
+    <!-- Button -->
+    <a 
+      href="{{url_for('cafes')}}" 
+      role="button" 
+      class="mt-6 inline-block px-6 py-3 bg-yellow-900 text-white rounded-lg shadow hover:bg-yellow-800 transition transform hover:-translate-y-1"
+    >
+      Show Me!
+    </a>
+  </div>
+</div>
+{% endblock %}

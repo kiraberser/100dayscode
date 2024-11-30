@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add A New Cafe
+{% endblock %}
+
+{% block content %}
+<div class="bg-white mx-auto p-6 place-items-center">
+  <div class="bg-white p-8 rounded-lg shadow-2xl border border-slate-200 mt-1 place-items-center max-w-fit">
+    <h1 class="text-3xl font-semibold text-center text-gray-800 mb-6">Add a New Cafe</h1>
+    
+    <p class="text-center mb-4">
+      <a href="{{ url_for('cafes') }}" class="text-yellow-900 hover:underline">See all cafes</a>
+    </p>
+
+    <!-- Formulario para agregar un nuevo café -->
+    <form action="{{ url_for('add_cafe') }}" method="POST" class="space-y-4">
+      {{ form.hidden_tag() }}
+
+      <!-- Nombre del Café -->
+      <div class="flex flex-col">
+        <label for="name" class="text-sm font-medium text-gray-700">{{form.cafe.label}}</label>
+        {{ form.cafe(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+
+      <!-- Ubicación -->
+      <div class="flex flex-col">
+        <label for="location" class="text-sm font-medium text-gray-700">{{form.location.label}}</label>
+        {{ form.location(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+
+      <div class="flex flex-col">
+        <label for="location" class="text-sm font-medium text-gray-700">{{form.open_time.label}}</label>
+        {{ form.open_time(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+ 
+      <div class="flex flex-col">
+        <label for="location" class="text-sm font-medium text-gray-700">{{form.close_time.label}}</label>
+        {{ form.close_time(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+
+
+      <!-- Enchufes disponibles -->
+      <div class="flex flex-col">
+        <label for="power_sockets" class="text-sm font-medium text-gray-700">{{form.power_socket.label}}</label>
+        {{ form.power_socket(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+
+      <!-- Calidad del Wifi -->
+      <div class="flex flex-col">
+        <label for="wifi_strength" class="text-sm font-medium text-gray-700">{{form.wifi_strength.label}}</label>
+        {{ form.wifi_strength(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+
+      <!-- Calidad del Café -->
+      <div class="flex flex-col">
+        <label for="coffe_raiting" class="text-sm font-medium text-gray-700">{{form.coffe_raiting.label}}</label>
+        {{ form.coffe_raiting(class="width mt-2 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="flex justify-center mt-20">
+        {{ form.submit(class="px-6 py-2 bg-yellow-900 cursor-pointer text-white font-semibold rounded-lg hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-900") }}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
