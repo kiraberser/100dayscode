@@ -2,24 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    {% block title %}
-      Library
-    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Library {% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    {% block content %}
-      <h1>My Library</h1>
-      {% if books.0 %}
-        <ul>
-          {% for book in books %}
-            <li>{{ book.title }} - {{ book.author }} - {{ book.rating }}/10</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>Library is empty.</p>
-      {% endif %}
+  <body class="bg-gray-100 text-gray-900 font-sans">
 
-      <a href="{{ url_for('add') }}">Add New Book</a>
+    {% block content %}
+      <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-semibold text-center mb-8">My Library</h1>
+
+        {% if books.0 %}
+          <ul class="space-y-4">
+            {% for book in books %}
+              <li class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+                <div>
+                  <p class="text-xl font-semibold">{{ book.title }}</p>
+                  <p class="text-gray-700">{{ book.author }} - {{ book.rating }}/10</p>
+                </div>
+                <div class="flex space-x-4">
+                  <a href="{{ url_for('edit', id=book.id) }}" class="text-indigo-600 hover:text-indigo-800">Edit Rating</a>
+                  <a href="{{ url_for('delete', book_id=book.id) }}" class="text-red-600 hover:text-red-800">Delete</a>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-center text-lg text-gray-600">Library is empty.</p>
+        {% endif %}
+
+        <div class="mt-8 text-center">
+          <a href="{{ url_for('add') }}" class="text-white bg-indigo-600 hover:bg-indigo-700 py-2 px-4 rounded-md">Add New Book</a>
+        </div>
+      </div>
     {% endblock %}
+
   </body>
 </html>
