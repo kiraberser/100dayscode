@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap4/form.html' import render_form %}
+
+{% block title %}Add Movie{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Add a Movie</h1>
+</div>
+
+<div class="form-container">
+    {{ render_form(form, button_style='btn btn-primary mt-4') }}
+</div>
+
+{% endblock %}
