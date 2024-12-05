@@ -59,26 +59,24 @@ def fetch_movie_details(movie_id):
 # 4.- When is added a movie, don't have any review or rating, the data should be created
 @app.route('/edit', methods=['GET', 'POST'])
 def edit():
-    form = EditForm()
+    edit_form = EditForm()
     movie_id = request.args.get('id')
-    update_review = form.update_review.data
-    update_rating = form.update_rating.data
-    if form.validate_on_submit():
+    update_review = edit_form.update_review.data
+    update_rating = edit_form.update_rating.data
+    if edit_form.validate_on_submit():
         update_movie = db.get_or_404(Movie, movie_id)
         update_movie.rating = update_rating
         update_movie.review = update_review
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('edit.html', form=form)
+    return render_template('edit.html', form=edit_form)
 
 @app.route('/delete/<int:movie_id>', methods=['GET'])
 def delete(movie_id):
-    with app.app_context():
-        movie_to_delete = db.get_or_404(Movie, movie_id)
-        db.session.delete(movie_to_delete)
-        db.session.commit()
+    movie_to_delete = db.get_or_404(Movie, movie_id)
+    db.session.delete(movie_to_delete)
+    db.session.commit()
     return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
