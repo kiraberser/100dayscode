@@ -7,17 +7,20 @@ load_dotenv()
 API_KEY_TMDB = os.getenv('API_KEY_TMDB') 
 
 class TMDBMovieFetcher:
-    def __init__(self, query):
+    def __init__(self, query, ):
         """
         Inicializa el objeto con la API key y el término de búsqueda.
         """
         self.query = query
-        self.url = f"https://api.themoviedb.org/3/search/movie"
+        self.id = 0
+        self.url_movies = f"https://api.themoviedb.org/3/search/movie"
+        self.url_movie_details = f'https://api.themoviedb.org/3/movie/'
         self.headers = {
             'accept': "application/json",
             'Authorization': f"Bearer {API_KEY_TMDB}"
         }
         self.results = []
+        self.select_movie = []
 
     def fetch_movies(self):
         """
@@ -29,7 +32,7 @@ class TMDBMovieFetcher:
             'language': 'en-US',
             'page': 1
         }
-        response = requests.get(url=self.url, headers=self.headers, params=params)
+        response = requests.get(url=self.url_movies, headers=self.headers, params=params)
         if response.status_code == 200:
             self.results = response.json().get('results', [])
         else:
@@ -39,20 +42,24 @@ class TMDBMovieFetcher:
         """
         Devuelve una lista de títulos únicos.
         """
-        title_and_date = []
         unique_titles = set()
-
         for movie in self.results:
             original_title = movie['original_title']
-            if original_title not in unique_titles:
+            original_language = movie['original_language']
+            if original_title not in unique_titles and original_language == 'en':
                 unique_titles.add(original_title)
-                title_and_date.append({
+                self.select_movie.append({
                     'id': movie['id'],
                     'original_title': movie['original_title'],
                     'release_date': movie['release_date']
                 })
-        return title_and_date
+        return self.select_movie
 
-    def get_movies_details(self):
-        pass
-
+    def get_movies_details(self, movie):
+        url = f'{self.url_movie_details}/{movie}'
+        response = requests.get(url=url, headers=self.headers)
+        if response.status_code == 200:
+            movie_data = response.json()
+            return movie_data
+        else:
+            raise Exception(f"Error en la solicitud: {response.status_code} {response.text}")        

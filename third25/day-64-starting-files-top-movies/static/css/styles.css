@@ -65,8 +65,8 @@
 	 cursor: pointer;
 	 width: calc(33% - 3rem);
 	 min-width: calc(33% - 3rem);
-	 height: 400px;
-	 min-height: 400px;
+	 height: 500px;
+	 min-height: 500px;
 	 perspective: 1000px;
 	 margin: 1rem auto;
 	 position: relative;
@@ -153,7 +153,7 @@
 	 position: relative;
 	 transform-style: preserve-3d;
 	 transition: 300ms ease;
-	 margin-bottom: 10px;
+	 margin: 10px;
 }
  .button:before {
 	 transition: 300ms ease;
